@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center gap-6">
       <div className="flex gap-2 items-center justify-center">
+        <div className="text-5xl">{"\u{1F457}"}</div>
         <div className="font-bold md:text-5xl text-4xl text-center">
           Styled for You
         </div>
