@@ -4,10 +4,10 @@ import { colors, createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: colors.cyan[400],
+      main: colors.teal.A200,
     },
     secondary: {
-      main: colors.yellow.A700,
+      main: colors.deepPurple[300],
     },
   },
 });
