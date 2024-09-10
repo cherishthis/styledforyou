@@ -29,3 +29,17 @@ const StyledForYou = () => {
 };
 
 export default StyledForYou;
+
+// src/App.js
+import React from 'react';
+import StyledForYou from './StyledForYou';
+
+function App() {
+  return (
+    <div>
+      <StyledForYou />
+    </div>
+  );
+}
+
+export default App;
