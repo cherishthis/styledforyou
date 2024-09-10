@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled for You</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8faff;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .styled-for-you-container {
+      width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 2px solid #c4e6f1;
+      border-radius: 10px;
+      background-color: #f8faff;
+      text-align: center;
+    }
+
+    .header {
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 2em;
+      color: #2d697f;
+    }
+
+    .header p {
+      font-size: 1em;
+      color: #333;
+      line-height: 1.5em;
+      margin: 15px 0;
+    }
+
+    .questions {
+      margin-bottom: 20px;
+    }
+
+    .question-button {
+      width: 100%;
+      background-color: #d7f0f9;
+      color: #333;
+      border: 2px solid #a5d5e5;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .question-button:hover {
+      background-color: #a5d5e5;
+    }
+
+    .style-button {
+      width: 100%;
+      background-color: #00c6b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 15px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .style-button:hover {
+      background-color: #00a994;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="styled-for-you-container">
+    <div class="header">
+      <h1>👗Styled for you</h1>
+      <p>
+        Say hello to effortless elegance with "Styled for You" by Abbey Glass, your personalized fashion concierge. 
+        Imagine curated product recommendations that align perfectly with your personal tastes, needs, and the unique shapes 
+        that make you, <strong>you</strong>. By answering a few quick questions about yourself, your upcoming event, and your 
+        distinctive silhouette, you unlock a world of custom style possibilities tailored just for you. 
+        Embrace the luxury of curated fashion and let Abbey Glass transform the way you shop—because you deserve nothing less than 
+        perfection. Discover your personalized style journey today.
+      </p>
+    </div>
+
+    <div class="questions">
+      <button class="question-button" onclick="alert('Tell us about your event')">🌐 Tell us about your event (Mother of, wedding, black tie, cocktail, daytime)</button>
+      <button class="question-button" onclick="alert('Tell us about yourself')">😊 Tell us about yourself (age, location, style, vibe, favorite color, favorite brands)</button>
+      <button class="question-button" onclick="alert('Tell us about your shape')">✏️ Tell us about your shape (size, body considerations, coverage on arms/legs)</button>
+    </div>
+
+    <button class="style-button" onclick="alert('Styled for you!')">✨ Style for me</button>
+  </div>
+
+</body>
+</html>
