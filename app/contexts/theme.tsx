@@ -1,13 +1,18 @@
 "use client";
-import { colors, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "Bodoni_Moda",
+  },
   palette: {
     primary: {
-      main: colors.teal.A200,
+      main: "#FFDBCD",
+      light: "#FFF4EE",
     },
     secondary: {
-      main: colors.deepPurple[300],
+      // main: "#BBC2E2",
+      main: "#9C8990",
     },
   },
 });
