@@ -1,0 +1,138 @@
+import React, { useState } from "react";
+import "./App.css"; // Add your custom CSS here
+
+const App = () => {
+  const [step, setStep] = useState(2); // Start at step 2 (2nd flow)
+  const [selectedDress, setSelectedDress] = useState(null);
+  const [selectedAccessory, setSelectedAccessory] = useState(null);
+
+  const dresses = [
+    { id: 1, img: "<https://via.placeholder.com/200>", description: "Dress 1" },
+    { id: 2, img: "<https://via.placeholder.com/200>", description: "Dress 2" },
+    { id: 3, img: "<https://via.placeholder.com/200>", description: "Dress 3" },
+  ];
+
+  const accessories = [
+    { id: 1, img: "<https://via.placeholder.com/200>", description: "Handbag 1" },
+    { id: 2, img: "<https://via.placeholder.com/200>", description: "Handbag 2" },
+    { id: 3, img: "<https://via.placeholder.com/200>", description: "Handbag 3" },
+  ];
+
+  const proceedToNextStep = (nextStep) => setStep(nextStep);
+
+  const handleDressSelect = (dress) => {
+    setSelectedDress(dress);
+    proceedToNextStep(3); // Move to the 3rd flow
+  };
+
+  const handleAccessorySelect = (accessory) => {
+    setSelectedAccessory(accessory);
+    proceedToNextStep(4); // Move to the final 4th flow
+  };
+
+  return (
+    <div className="container">
+      {step === 2 && (
+        <SecondFlow
+          dresses={dresses}
+          onDressSelect={handleDressSelect}
+        />
+      )}
+      {step === 3 && (
+        <ThirdFlow
+          accessories={accessories}
+          onAccessorySelect={handleAccessorySelect}
+        />
+      )}
+      {step === 4 && (
+        <FourthFlow
+          selectedDress={selectedDress}
+          selectedAccessory={selectedAccessory}
+        />
+      )}
+    </div>
+  );
+};
+
+// 2nd Flow: Select Dress
+const SecondFlow = ({ dresses, onDressSelect }) => {
+  return (
+    <div>
+      <h2>Styled for you</h2>
+      <p>We've thought about your preferences. Here are your top 3 recommendations.</p>
+      <div className="recommendations">
+        {dresses.map((dress) => (
+          <div
+            key={dress.id}
+            className="recommendation-card"
+            onClick={() => onDressSelect(dress)}
+          >
+            <img src={dress.img} alt={`Dress ${dress.id}`} />
+            <p>{dress.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// 3rd Flow: Select Accessory
+const ThirdFlow = ({ accessories, onAccessorySelect }) => {
+  return (
+    <div>
+      <h2>Complete the look with accessories</h2>
+      <p>Choose from these handbags or jewelry to complement your look.</p>
+      <div className="recommendations">
+        {accessories.map((accessory) => (
+          <div
+            key={accessory.id}
+            className="recommendation-card"
+            onClick={() => onAccessorySelect(accessory)}
+          >
+            <img src={accessory.img} alt={`Accessory ${accessory.id}`} />
+            <p>{accessory.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// 4th Flow: Package Selection and Checkout
+const FourthFlow = ({ selectedDress, selectedAccessory }) => {
+  return (
+    <div>
+      <h2>Your Selected Package</h2>
+      <p>Here is your package for the event:</p>
+      <div className="package">
+        <div>
+          <h4>Your Dress</h4>
+          {selectedDress && <img src={selectedDress.img} alt="Selected Dress" />}
+          <div className="size-options">
+            <span className="size-btn">XS</span>
+            <span className="size-btn">S</span>
+            <span className="size-btn">M</span>
+            <span className="size-btn">L</span>
+            <span className="size-btn">XL</span>
+          </div>
+        </div>
+        <div>
+          <h4>Your Accessory</h4>
+          {selectedAccessory && (
+            <img src={selectedAccessory.img} alt="Selected Accessory" />
+          )}
+          <div className="color-options">
+            <span className="color-btn">Black</span>
+            <span className="color-btn">Green</span>
+            <span className="color-btn">Yellow</span>
+          </div>
+        </div>
+        <div>
+          <button className="checkout-btn">Add to Cart and Checkout</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
