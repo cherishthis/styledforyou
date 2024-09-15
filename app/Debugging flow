@@ -1,0 +1,205 @@
+import React, { useState } from "react";
+import "./App.css"; // Add your custom CSS here
+
+const App = () => {
+  const [step, setStep] = useState(1); // Start at step 1 (1st flow)
+  const [selectedDress, setSelectedDress] = useState(null);
+  const [selectedAccessory, setSelectedAccessory] = useState(null);
+  const [userResponses, setUserResponses] = useState({
+    event: "",
+    yourself: "",
+    shape: "",
+  });
+
+  const dresses = [
+    { id: 1, img: "https://via.placeholder.com/200", description: "Dress 1" },
+    { id: 2, img: "https://via.placeholder.com/200", description: "Dress 2" },
+    { id: 3, img: "https://via.placeholder.com/200", description: "Dress 3" },
+  ];
+
+  const accessories = [
+    { id: 1, img: "https://via.placeholder.com/200", description: "Handbag 1" },
+    { id: 2, img: "https://via.placeholder.com/200", description: "Handbag 2" },
+    { id: 3, img: "https://via.placeholder.com/200", description: "Handbag 3" },
+  ];
+
+  // Function to proceed to next step
+  const proceedToNextStep = (nextStep) => {
+    console.log("Proceeding to step:", nextStep);
+    setStep(nextStep);
+  };
+
+  const handleDressSelect = (dress) => {
+    setSelectedDress(dress);
+    proceedToNextStep(3); // Move to the 3rd flow
+  };
+
+  const handleAccessorySelect = (accessory) => {
+    setSelectedAccessory(accessory);
+    proceedToNextStep(4); // Move to the final 4th flow
+  };
+
+  // Function to handle form input and transition to 2nd flow
+  const handleStyleForMeClick = () => {
+    proceedToNextStep(2); // Transition to the 2nd flow
+  };
+
+  return (
+    <div className="container">
+      {step === 1 && (
+        <FirstFlow
+          userResponses={userResponses}
+          setUserResponses={setUserResponses}
+          onProceed={handleStyleForMeClick}
+        />
+      )}
+      {step === 2 && (
+        <SecondFlow
+          dresses={dresses}
+          onDressSelect={handleDressSelect}
+        />
+      )}
+      {step === 3 && (
+        <ThirdFlow
+          accessories={accessories}
+          onAccessorySelect={handleAccessorySelect}
+        />
+      )}
+      {step === 4 && (
+        <FourthFlow
+          selectedDress={selectedDress}
+          selectedAccessory={selectedAccessory}
+        />
+      )}
+    </div>
+  );
+};
+
+// 1st Flow: Initial User Interaction (e.g., Preferences or Welcome)
+const FirstFlow = ({ userResponses, setUserResponses, onProceed }) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserResponses((prevResponses) => ({
+      ...prevResponses,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <div>
+      <h2>Styled for You | Abbey Glass</h2>
+      <p>Say hello to effortless elegance with your personalized style journey.</p>
+
+      <div className="accordion">
+        <h4>🎉 Tell us about your event!</h4>
+        <textarea
+          name="event"
+          value={userResponses.event}
+          onChange={handleInputChange}
+          placeholder="Describe your event here..."
+        />
+        <h4>😊 Tell us about yourself</h4>
+        <textarea
+          name="yourself"
+          value={userResponses.yourself}
+          onChange={handleInputChange}
+          placeholder="Tell us about yourself..."
+        />
+        <h4>📝 Tell us about your shape</h4>
+        <textarea
+          name="shape"
+          value={userResponses.shape}
+          onChange={handleInputChange}
+          placeholder="Describe your body shape..."
+        />
+      </div>
+
+      <button className="style-for-me-btn" onClick={onProceed}>
+        ✨ Style for Me
+      </button>
+    </div>
+  );
+};
+
+// 2nd Flow: Select Dress
+const SecondFlow = ({ dresses, onDressSelect }) => {
+  return (
+    <div>
+      <h2>Styled for you</h2>
+      <p>We've thought about your preferences. Here are your top 3 recommendations.</p>
+      <div className="recommendations">
+        {dresses.map((dress) => (
+          <div
+            key={dress.id}
+            className="recommendation-card"
+            onClick={() => onDressSelect(dress)}
+          >
+            <img src={dress.img} alt={`Dress ${dress.id}`} />
+            <p>{dress.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// 3rd Flow: Select Accessory
+const ThirdFlow = ({ accessories, onAccessorySelect }) => {
+  return (
+    <div>
+      <h2>Complete the look with accessories</h2>
+      <p>Choose from these handbags or jewelry to complement your look.</p>
+      <div className="recommendations">
+        {accessories.map((accessory) => (
+          <div
+            key={accessory.id}
+            className="recommendation-card"
+            onClick={() => onAccessorySelect(accessory)}
+          >
+            <img src={accessory.img} alt={`Accessory ${accessory.id}`} />
+            <p>{accessory.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// 4th Flow: Package Selection and Checkout
+const FourthFlow = ({ selectedDress, selectedAccessory }) => {
+  return (
+    <div>
+      <h2>Your Selected Package</h2>
+      <p>Here is your package for the event:</p>
+      <div className="package">
+        <div>
+          <h4>Your Dress</h4>
+          {selectedDress && <img src={selectedDress.img} alt="Selected Dress" />}
+          <div className="size-options">
+            <span className="size-btn">XS</span>
+            <span className="size-btn">S</span>
+            <span className="size-btn">M</span>
+            <span className="size-btn">L</span>
+            <span className="size-btn">XL</span>
+          </div>
+        </div>
+        <div>
+          <h4>Your Accessory</h4>
+          {selectedAccessory && (
+            <img src={selectedAccessory.img} alt="Selected Accessory" />
+          )}
+          <div className="color-options">
+            <span className="color-btn">Black</span>
+            <span className="color-btn">Green</span>
+            <span className="color-btn">Yellow</span>
+          </div>
+        </div>
+        <div>
+          <button className="checkout-btn">Add to Cart and Checkout</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
