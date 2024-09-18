@@ -8,21 +8,14 @@ const ResponseBox = () => {
   const { responses, resetResponses } = useResponsesContext();
   const [hide, setHide] = useState<boolean>(false);
 
-  const checkForResponses = () => {
+  useEffect(() => {
     if (
       responses.event === "" &&
       responses.shape === "" &&
       responses.yourself === ""
     ) {
-      return false;
-    } else return true;
-  };
-
-  useEffect(() => {
-    const check = checkForResponses();
-    if (check) {
-      setHide(false);
-    } else setHide(true);
+      setHide(true);
+    } else setHide(false);
   }, [responses]);
 
   return (

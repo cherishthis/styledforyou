@@ -42,7 +42,7 @@ const Prompt = ({
 
   useEffect(() => {
     setResponse(responses[topic]);
-  }, [responses[topic]]);
+  }, [responses, topic]);
 
   return (
     <div
