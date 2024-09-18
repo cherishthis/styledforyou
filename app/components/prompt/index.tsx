@@ -3,7 +3,7 @@ import { useResponsesContext } from "@/app/contexts/responses";
 import ClearIcon from "@mui/icons-material/Clear";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Button, IconButton, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type PromptProps = {
   topic: "event" | "shape" | "yourself";
@@ -40,6 +40,10 @@ const Prompt = ({
     handleClose();
   };
 
+  useEffect(() => {
+    setResponse(responses[topic]);
+  }, [responses[topic]]);
+
   return (
     <div
       className={`w-full flex flex-col gap-2 items-center md:text-lg hover:bg-primary-200 transition ease-in delay-100 cursor-pointer rounded-md ${
@@ -61,9 +65,13 @@ const Prompt = ({
         )}
       </div>
       {isOpen && (
-        <form onSubmit={handleSubmit} className="w-full flex gap-2">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col md:flex-row gap-2"
+        >
           <TextField
             className="w-full"
+            multiline
             variant="standard"
             value={response}
             name={topic}
@@ -79,7 +87,7 @@ const Prompt = ({
               },
             }}
           />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2">
             <Button
               type="submit"
               variant="contained"
