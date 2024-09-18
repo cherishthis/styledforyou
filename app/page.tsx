@@ -1,10 +1,10 @@
 import { AbbeyGlassHook } from "@/public/AbbeyGlassHook";
-import { Button } from "@mui/material";
 import AbbeyLogo from "../public/Abbey-Glass.png";
 import BrandHook from "./components/brand-hook";
 import BrandLogo from "./components/brand-logo";
 import Prompt from "./components/prompt";
 import ResponseBox from "./components/response-box";
+import UserDetails from "./components/user-details";
 
 export default function Home() {
   return (
@@ -16,7 +16,8 @@ export default function Home() {
       </div>
       <BrandLogo img={AbbeyLogo} />
       <BrandHook hook={AbbeyGlassHook} />
-      <div className="flex flex-col items-end rounded-md w-full md:w-4/5">
+      <UserDetails />
+      <div className="flex flex-col items-end rounded-md w-full md:w-4/5 gap-1">
         <Prompt
           emojiString={"\u{1F389}"}
           description="Tell us about your event!"
@@ -26,31 +27,20 @@ export default function Home() {
         />
         <Prompt
           emojiString={"\u{1F60A}"}
-          description="Tell us about yourself"
+          description="Tell us about yourself!"
           topic="yourself"
-          placeholderText="(age, location, style, favorite
-            color, favorite brands)"
+          placeholderText="(style, favorite
+            colors, favorite brands)"
         />
         <Prompt
           emojiString={"\u{1F4CF}"}
-          description="Tell us about your shape"
+          description="Tell us about your shape!"
           topic="shape"
-          placeholderText="(size, body considerations, coverage on
+          placeholderText="(body considerations, coverage on
             arms/legs)"
         />
       </div>
       <ResponseBox />
-      <div className="flex w-full md:w-4/5 justify-end">
-        <Button
-          style={{ display: "flex", gap: "4px", color: "white" }}
-          variant="contained"
-          disabled={false}
-          color="secondary"
-        >
-          <div>{"\u{2728}"}</div>
-          <div className="font-bold">Style for me</div>
-        </Button>
-      </div>
       <div className="flex w-full md:w-4/5 justify-end"></div>
     </div>
   );

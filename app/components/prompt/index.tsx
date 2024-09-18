@@ -3,7 +3,7 @@ import { useResponsesContext } from "@/app/contexts/responses";
 import ClearIcon from "@mui/icons-material/Clear";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Button, IconButton, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type PromptProps = {
   topic: "event" | "shape" | "yourself";
@@ -40,9 +40,13 @@ const Prompt = ({
     handleClose();
   };
 
+  useEffect(() => {
+    setResponse(responses[topic]);
+  }, [responses, topic]);
+
   return (
     <div
-      className={`w-full flex flex-col gap-2 items-center md:text-lg hover:bg-primary-200 transition ease-in delay-100 cursor-pointer ${
+      className={`w-full flex flex-col gap-2 items-center md:text-lg hover:bg-primary-200 transition ease-in delay-100 cursor-pointer rounded-md ${
         isOpen ? "bg-primary-200 border border-primary-100" : "bg-primary-100"
       } p-4 justify-between`}
     >
@@ -61,9 +65,13 @@ const Prompt = ({
         )}
       </div>
       {isOpen && (
-        <form onSubmit={handleSubmit} className="w-full flex gap-2">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col md:flex-row gap-2"
+        >
           <TextField
             className="w-full"
+            multiline
             variant="standard"
             value={response}
             name={topic}
@@ -72,20 +80,20 @@ const Prompt = ({
             slotProps={{
               input: {
                 endAdornment: (
-                  <IconButton onClick={() => setResponse("")}>
+                  <IconButton onClick={() => setResponse("")} size="small">
                     <ClearIcon color="secondary" />
                   </IconButton>
                 ),
               },
             }}
           />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2">
             <Button
               type="submit"
               variant="contained"
               size="small"
               color="primary"
-              style={{ fontWeight: "bold", fontFamily: "inherit" }}
+              style={{ fontWeight: "bold" }}
             >
               Save
             </Button>
@@ -95,7 +103,7 @@ const Prompt = ({
               size="small"
               color="secondary"
               variant="outlined"
-              style={{ fontWeight: "bold", fontFamily: "inherit" }}
+              style={{ fontWeight: "bold" }}
             >
               Close
             </Button>
