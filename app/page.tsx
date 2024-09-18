@@ -5,6 +5,7 @@ import BrandHook from "./components/brand-hook";
 import BrandLogo from "./components/brand-logo";
 import Prompt from "./components/prompt";
 import ResponseBox from "./components/response-box";
+import UserDetails from "./components/user-details";
 
 export default function Home() {
   return (
@@ -16,7 +17,8 @@ export default function Home() {
       </div>
       <BrandLogo img={AbbeyLogo} />
       <BrandHook hook={AbbeyGlassHook} />
-      <div className="flex flex-col items-end rounded-md w-full md:w-4/5">
+      <UserDetails />
+      <div className="flex flex-col items-end rounded-md w-full md:w-4/5 gap-1">
         <Prompt
           emojiString={"\u{1F389}"}
           description="Tell us about your event!"

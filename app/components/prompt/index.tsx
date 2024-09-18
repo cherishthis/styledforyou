@@ -42,7 +42,7 @@ const Prompt = ({
 
   return (
     <div
-      className={`w-full flex flex-col gap-2 items-center md:text-lg hover:bg-primary-200 transition ease-in delay-100 cursor-pointer ${
+      className={`w-full flex flex-col gap-2 items-center md:text-lg hover:bg-primary-200 transition ease-in delay-100 cursor-pointer rounded-md ${
         isOpen ? "bg-primary-200 border border-primary-100" : "bg-primary-100"
       } p-4 justify-between`}
     >
@@ -72,7 +72,7 @@ const Prompt = ({
             slotProps={{
               input: {
                 endAdornment: (
-                  <IconButton onClick={() => setResponse("")}>
+                  <IconButton onClick={() => setResponse("")} size="small">
                     <ClearIcon color="secondary" />
                   </IconButton>
                 ),
@@ -85,7 +85,7 @@ const Prompt = ({
               variant="contained"
               size="small"
               color="primary"
-              style={{ fontWeight: "bold", fontFamily: "inherit" }}
+              style={{ fontWeight: "bold" }}
             >
               Save
             </Button>
@@ -95,7 +95,7 @@ const Prompt = ({
               size="small"
               color="secondary"
               variant="outlined"
-              style={{ fontWeight: "bold", fontFamily: "inherit" }}
+              style={{ fontWeight: "bold" }}
             >
               Close
             </Button>
